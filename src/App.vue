@@ -1,7 +1,19 @@
 <template>
-  <div id="shopping-list">
-    <h1>{{ header.toLocaleUpperCase() }}</h1>
-    <b-container fluid>
+  <div id="shopping-list" class="container">
+    <div class="header col mb-2">
+      <h1>{{ header.toLocaleUpperCase() }}</h1>
+      <button
+        v-if="state === 'default'"
+        @click="changeState('edit')"
+        class="btn btn-primary"
+      >
+        Add item
+      </button>
+      <button v-else @click="changeState('default')" class="btn btn-danger">
+        Cancel
+      </button>
+    </div>
+    <b-container fluid v-if="state === 'edit'">
       <b-row class="my-1">
         <b-col sm="9">
           <b-form-input
@@ -20,6 +32,7 @@
     <ul>
       <li v-for="(item, index) of items" :key="index">{{ item }}</li>
     </ul>
+    <p v-if="items.length === 0" class="">Nice job you've bought everything</p>
   </div>
 </template>
 
@@ -29,15 +42,21 @@ export default {
   components: {},
   data() {
     return {
+      state: "default",
       header: "Shopping list App",
       newItem: "",
-      items: ["10 party hats", "2 board games", "20 cups"],
+      items: [
+        // "10 party hats", "2 board games", "20 cups"
+      ],
     };
   },
   methods: {
     saveItem() {
       this.items.push(this.newItem);
       this.newItem = "";
+    },
+    changeState(newState) {
+      this.state = newState;
     },
   },
 };
