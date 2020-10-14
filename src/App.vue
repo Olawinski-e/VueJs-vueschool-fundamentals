@@ -1,19 +1,48 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="shopping-list">
+    <h1>{{ header.toLocaleUpperCase() }}</h1>
+    <!-- <div class="form-group">
+      <input
+        type="text"
+        v-model="newItem"
+        placeholder="Add an object"
+        class="form-control mb-2"
+      />
+      <button class="btn btn-info">Save item</button>
+    </div> -->
+    <b-container fluid>
+      <b-row class="my-1">
+        <b-col sm="9">
+          <b-form-input
+            type="text"
+            v-model="newItem"
+            placeholder="Add an object"
+            class="mb-2"
+          ></b-form-input>
+        </b-col>
+        <b-col sm="3">
+          <button class="btn btn-info">Save item</button>
+        </b-col>
+      </b-row>
+    </b-container>
+    <ul>
+      <li v-for="(item, index) of items" :key="index">{{ item }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: {},
+  data() {
+    return {
+      header: "Shopping list App",
+      newItem: "",
+      items: ["10 party hats", "2 board games", "20 cups"],
+    };
+  },
+};
 </script>
 
 <style>
