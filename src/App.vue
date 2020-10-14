@@ -1,15 +1,6 @@
 <template>
   <div id="shopping-list">
     <h1>{{ header.toLocaleUpperCase() }}</h1>
-    <!-- <div class="form-group">
-      <input
-        type="text"
-        v-model="newItem"
-        placeholder="Add an object"
-        class="form-control mb-2"
-      />
-      <button class="btn btn-info">Save item</button>
-    </div> -->
     <b-container fluid>
       <b-row class="my-1">
         <b-col sm="9">
@@ -17,11 +8,12 @@
             type="text"
             v-model="newItem"
             placeholder="Add an object"
+            @keyup.enter="saveItem"
             class="mb-2"
           ></b-form-input>
         </b-col>
         <b-col sm="3">
-          <button class="btn btn-info">Save item</button>
+          <button @click="saveItem" class="btn btn-info">Save item</button>
         </b-col>
       </b-row>
     </b-container>
@@ -41,6 +33,12 @@ export default {
       newItem: "",
       items: ["10 party hats", "2 board games", "20 cups"],
     };
+  },
+  methods: {
+    saveItem() {
+      this.items.push(this.newItem);
+      this.newItem = "";
+    },
   },
 };
 </script>
